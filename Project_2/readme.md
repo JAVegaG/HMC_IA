@@ -5,15 +5,15 @@ In this project, the logistic model will be seen as if it would be implemented o
 
 * First, the dot product of the input vector (X) and the weights of the neuron (W) is performed, and the result is added to the neuron's bias (b): 
 
-```math
+$$
 \begin{equation}
 z = \vec{W} \cdot \vec{X} + b
 \end{equation}
-```
+$$
 
 * Then, the Sigmoid function is used as the activation function (σ) of the neuron. The result of this function would be a value between 1 and 0 corresponding to one of the two classes:
 
-```math
+$$
 \begin{equation}
 \sigma(z) = \hat{y}(z) =
 \begin{cases} 
@@ -22,27 +22,27 @@ z = \vec{W} \cdot \vec{X} + b
 \frac{\exp{z}}{1+\exp{z}}, & \mbox{if } z < 0
 \end{cases}
 \end{equation}
-```
+$$
 
 * Next, an optimization algorithm is used to adjust the parameters of the model, which would give better results in the classification. In this example, the gradient descendent is the algorithm used as shown below, where θ is the parameter to optimize (weights or bias), η is the learning rate, ∇ is the gradient itself, y is the actual value, and L is the loss function:
 
-```math
+$$
 \begin{equation}
 \theta_{t+1} = \theta_{t} - \eta\nabla{L(f(x;\theta),y)}
 \end{equation}
-```
+$$
 
 * Later, the binary cross entropy loss function is used to determine how exact is the prediction of the model comparing it to the real value:
 
-```math
+$$
 \begin{equation}
 L_{CE} = -\frac{1}{m}\sum_{i=1}^{m}{y\log{(\hat{y})}}+(1-y)\log{(1-\hat{y})}
 \end{equation}
-```
+$$
 
 * Finally, the partial derivatives of the loss function with respect to the parameters:
 
-```math
+$$
 \begin{equation}
 \frac{\partial L_{CE}(\hat{y},y)}{\partial \vec{W}}
 =
@@ -52,8 +52,4 @@ L_{CE} = -\frac{1}{m}\sum_{i=1}^{m}{y\log{(\hat{y})}}+(1-y)\log{(1-\hat{y})}
 =
 \frac{1}{m}(\hat{y}-y)
 \end{equation}
-```
-
-```math
-\sqrt{3}
-```
+$$
