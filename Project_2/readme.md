@@ -30,7 +30,7 @@ z = \vec{W} \cdot \vec{X} + b
 \begin{equation}
 \theta_{t+1} = \theta_{t} - \eta\nabla{L(f(x;\theta),y)}
 \end{equation}
-```math
+```
 
 * Later, the binary cross entropy loss function is used to determine how exact is the prediction of the model comparing it to the real value:
 
@@ -38,7 +38,7 @@ z = \vec{W} \cdot \vec{X} + b
 \begin{equation}
 L_{CE} = -\frac{1}{m}\sum_{i=1}^{m}{y\log{(\hat{y})}}+(1-y)\log{(1-\hat{y})}
 \end{equation}
-```math
+```
 
 * Finally, the partial derivatives of the loss function with respect to the parameters:
 
@@ -52,4 +52,8 @@ L_{CE} = -\frac{1}{m}\sum_{i=1}^{m}{y\log{(\hat{y})}}+(1-y)\log{(1-\hat{y})}
 =
 \frac{1}{m}(\hat{y}-y)
 \end{equation}
+```
+
 ```math
+\sqrt{3}
+```
