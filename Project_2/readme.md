@@ -44,12 +44,8 @@ $$
 
 $$
 \begin{equation}
-\frac{\partial L_{CE}(\hat{y},y)}{\partial \vec{W}}
-=
-\frac{1}{m}(\hat{y}-y)\vec{X}^T_i
-\\
-\frac{\partial L_{CE}(\hat{y},y)}{\partial \vec{b}}
-=
-\frac{1}{m}(\hat{y}-y)
+\frac{\partial L_{CE}(\hat{y},y)}{\partial \vec{W}} = \frac{1}{m}(\hat{y}-y)\vec{X}^T_i
+\qquad
+\frac{\partial L_{CE}(\hat{y},y)}{\partial \vec{b}} = \frac{1}{m}(\hat{y}-y)
 \end{equation}
 $$
