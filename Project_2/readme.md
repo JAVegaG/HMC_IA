@@ -16,11 +16,7 @@ $$
 $$
 \begin{equation}
 \sigma(z) = \hat{y}(z) =
-\begin{cases} 
-\frac{1}{1+\exp{z}}, & \mbox{if } z \geq 0
-\\
-\frac{\exp{z}}{1+\exp{z}}, & \mbox{if } z < 0
-\end{cases}
+\frac{1}{1+\exp{(-z)}}
 \end{equation}
 $$
 
