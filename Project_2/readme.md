@@ -32,7 +32,7 @@ $$
 
 $$
 \begin{equation}
-L_{CE} = -\frac{1}{m}\sum_{i=1}^{m}{y\log{(\hat{y})}}+(1-y)\log{(1-\hat{y})}
+L_{CE} = -\frac{1}{m}\sum_{i=1}^{m}{y_i\log{(\hat{y}_i)}}+(1-y_i)\log{(1-\hat{y}_i)}
 \end{equation}
 $$
 
