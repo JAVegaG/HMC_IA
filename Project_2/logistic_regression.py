@@ -79,8 +79,12 @@ class logitRegression():
     return np.array([self._sigmoid_function(value) for value in x])
 
   def _sigmoid_function(self, x):
-    z = np.exp(-x)
-    return 1 / (1 + z)
+    if x >= 0:
+        z = np.exp(-x)
+        return 1 / (1 + z)
+    else:
+        z = np.exp(x)
+        return z / (1 + z)
 
   def _transform_x(self, x):
     """
