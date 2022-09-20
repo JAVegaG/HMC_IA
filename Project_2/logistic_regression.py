@@ -25,6 +25,9 @@ class logitRegression():
     self.change_w = np.zeros(x.shape[1])
     self.change_b = 0
 
+    self.cache_w = np.zeros(x.shape[1])
+    self.cache_b = 0
+
     for i in range(epochs):
         z = np.matmul(self.weights, x.transpose()) + self.bias
         pred = self._sigmoid(z)
@@ -65,7 +68,15 @@ class logitRegression():
 
       self.weights += self.change_w
       self.bias += self.change_b
-    
+
+    elif optimizationAlgorithm == 'AdaGrad':
+
+      self.cache_w += gradients_w**2
+      self.cache_b += gradient_b**2
+
+      self.weights -= -learningRate * gradients_w / (np.sqrt(self.cache_w) + 1e-6)
+      self.bias -= -learningRate * gradients_w / (np.sqrt(self.cache_b) + 1e-6)
+      
     else:
       self.weights -= SGD_w
       self.bias -= SGD_b
