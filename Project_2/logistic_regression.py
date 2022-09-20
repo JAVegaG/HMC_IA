@@ -60,8 +60,8 @@ class logitRegression():
 
     elif optimizationAlgorithm == 'SGDM':
 
-      self.change_w = SGD_w + momentum * self.change_w
-      self.change_b = SGD_b + momentum * self.change_b
+      self.change_w = momentum * self.change_w - SGD_w
+      self.change_b = momentum * self.change_b - SGD_b
 
       self.weights += self.change_w
       self.bias += self.change_b
