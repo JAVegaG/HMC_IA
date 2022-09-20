@@ -22,8 +22,8 @@ class logitRegression():
     self.weights = np.zeros(x.shape[1])
     self.bias = 0
 
-    change_w = 0
-    change_b = 0
+    self.change_w = 0
+    self.change_b = 0
 
     for i in range(epochs):
         z = np.matmul(self.weights, x.transpose()) + self.bias
@@ -60,11 +60,15 @@ class logitRegression():
 
     elif optimizationAlgorithm == 'SGDM':
 
-      change_w = SGD_w + momentum * change_w
-      change_b = SGD_b + momentum * change_b
+      self.change_w = SGD_w + momentum * self.change_w
+      self.change_b = SGD_b + momentum * self.change_b
 
-      self.weights += change_w
-      self_weights += change_b
+      self.weights += self.change_w
+      self.bias += self.change_b
+    
+    else:
+      self.weights -= SGD_w
+      self.bias -= SGD_b
 
   def predict(self, x):
     z = np.matmul(x, self.weights.transpose()) + self.bias
