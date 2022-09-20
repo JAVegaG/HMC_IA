@@ -74,9 +74,9 @@ class logitRegression():
       self.cache_w += gradients_w**2
       self.cache_b += gradient_b**2
 
-      self.weights -= -learningRate * gradients_w / (np.sqrt(self.cache_w) + 1e-6)
-      self.bias -= -learningRate * gradients_w / (np.sqrt(self.cache_b) + 1e-6)
-      
+      self.weights -= learningRate * gradients_w / (np.sqrt(self.cache_w) + 1e-6)
+      self.bias -= learningRate * gradients_w / (np.sqrt(self.cache_b) + 1e-6)
+
     else:
       self.weights -= SGD_w
       self.bias -= SGD_b
