@@ -3,72 +3,93 @@ import numpy as np
 from sklearn.metrics import accuracy_score
 
 class logitRegression():
-    def __init__(self):
-        self.losses = []
-        self.train_accuracies = []
+  def __init__(self):
+    self.losses = []
+    self.train_accuracies = []
 
-    def fit(self, x, y, epochs):
-        """
-        Given X and Y, where X is the input matrix of the net, and Y is the actual class expected
-        In this model, the input matrix X has a shape(x,w), where x is the number of instances
-        per each one of the attributes w
-        """
-        x = self._transform_x(x)
-        y = self._transform_y(y)
+  def fit(self, x, y, epochs, learningRate=0.1, optimizationAlgorithm='SGD',
+          momentum=0.9):
+    """
+    Given X and Y, where X is the input matrix of the net, and Y is the actual class expected
+    In this model, the input matrix X has a shape(x,w), where x is the number of instances
+    per each one of the attributes w.
 
-        self.weights = np.zeros(x.shape[1])
-        self.bias = 0
+    Weights and Bias are initialized as zeros
+    """
+    x = self._transform_x(x)
+    y = self._transform_y(y)
+  
+    self.weights = np.zeros(x.shape[1])
+    self.bias = 0
 
-        for i in range(epochs):
-            x_dot_weights = np.matmul(self.weights, x.transpose()) + self.bias
-            pred = self._sigmoid(x_dot_weights)
-            loss = self.compute_loss(y, pred)
-            error_w, error_b = self.compute_gradients(x, y, pred)
-            self.update_model_parameters(error_w, error_b)
+    change_w = 0
+    change_b = 0
 
-            pred_to_class = [1 if p > 0.5 else 0 for p in pred]
-            self.train_accuracies.append(accuracy_score(y, pred_to_class))
-            self.losses.append(loss)
+    for i in range(epochs):
+        z = np.matmul(self.weights, x.transpose()) + self.bias
+        pred = self._sigmoid(z)
+        loss = self.compute_loss(y, pred)
+        self.compute_optimization(x, y, pred, optimizationAlgorithm, learningRate, momentum)
 
-    def compute_loss(self, y_true, y_pred):
-        # binary cross entropy
-        y_zero_loss = y_true * np.log(y_pred + 1e-9)
-        y_one_loss = (1-y_true) * np.log(1 - y_pred + 1e-9)
-        return -np.mean(y_zero_loss + y_one_loss)
+        pred_to_class = [1 if p > 0.5 else 0 for p in pred]
+        self.train_accuracies.append(accuracy_score(y, pred_to_class))
+        self.losses.append(loss)
 
-    def compute_gradients(self, x, y_true, y_pred):
-        # derivative of binary cross entropy
-        difference =  y_pred - y_true
-        gradient_b = np.mean(difference)
-        gradients_w = np.matmul(x.transpose(), difference)
-        gradients_w = np.array([np.mean(grad) for grad in gradients_w])
+  def compute_loss(self, y_true, y_pred):
+    # binary cross entropy
+    y_zero_loss = y_true * np.log(y_pred + 1e-9)
+    y_one_loss = (1-y_true) * np.log(1 - y_pred + 1e-9)
+    return -np.mean(y_zero_loss + y_one_loss)
 
-        return gradients_w, gradient_b
+  def compute_optimization(self, x, y_true, y_pred, optimizationAlgorithm,
+                           learningRate, momentum):
+    # derivative of binary cross entropy
+  
+    error_y =  y_pred - y_true
+    gradient_b = np.mean(error_y)
+    gradients_w = np.matmul(x.transpose(), error_y)
+    gradients_w = np.array([np.mean(grad) for grad in gradients_w])
 
-    def update_model_parameters(self, error_w, error_b):
-        self.weights = self.weights - 0.1 * error_w
-        self.bias = self.bias - 0.1 * error_b
+    SGD_w = learningRate * gradients_w
+    SGD_b = learningRate * gradient_b
+    
+    if optimizationAlgorithm == 'SGD':
 
-    def predict(self, x):
-        x_dot_weights = np.matmul(x, self.weights.transpose()) + self.bias
-        probabilities = self._sigmoid(x_dot_weights)
-        return [1 if p > 0.5 else 0 for p in probabilities]
+      self.weights -= SGD_w
+      self.bias -= SGD_b
 
-    def _sigmoid(self, x):
-        return np.array([self._sigmoid_function(value) for value in x])
+    elif optimizationAlgorithm == 'SGDM':
 
-    def _sigmoid_function(self, x):
-        if x >= 0:
-            z = np.exp(-x)
-            return 1 / (1 + z)
-        else:
-            z = np.exp(x)
-            return z / (1 + z)
+      change_w = SGD_w + momentum * change_w
+      change_b = SGD_b + momentum * change_b
 
-    def _transform_x(self, x):
-        x = copy.deepcopy(x)
-        return x.values
+      self.weights += change_w
+      self_weights += change_b
 
-    def _transform_y(self, y):
-        y = copy.deepcopy(y)
-        return y.values.reshape(y.shape[0], 1)
+  def predict(self, x):
+    z = np.matmul(x, self.weights.transpose()) + self.bias
+    probabilities = self._sigmoid(z)
+    return [1 if p > 0.5 else 0 for p in probabilities]
+
+  def _sigmoid(self, x):
+    return np.array([self._sigmoid_function(value) for value in x])
+
+  def _sigmoid_function(self, x):
+    z = np.exp(-x)
+    return 1 / (1 + z)
+
+  def _transform_x(self, x):
+    """
+    This function returns only the values contained by the pandas dataframe x
+    as an array
+    """
+    x = copy.deepcopy(x)
+    return x.values
+
+  def _transform_y(self, y):
+    """
+    This function returns only the values contained by the pandas series y
+    as a column vector
+    """
+    y = copy.deepcopy(y)
+    return y.values.reshape(y.shape[0], 1)
