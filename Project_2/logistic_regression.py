@@ -22,7 +22,7 @@ class logitRegression():
     self.weights = np.zeros(x.shape[1])
     self.bias = 0
 
-    self.change_w = 0
+    self.change_w = np.zeros(x.shape[1])
     self.change_b = 0
 
     for i in range(epochs):
