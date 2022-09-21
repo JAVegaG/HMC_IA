@@ -38,15 +38,15 @@ def plot_cost(J_all, num_epochs):
 def test(theta, x, mu, std):
 
     y = []
-    aux = 0
 
     for k in range(0, len(x)):
         for q in range(0, x.shape[1]):
             x[k, q] = (x[k, q] - mu[q])/std[q]
-            if q == 0:
-                aux = theta[q]
+        for h in range(0, len(theta)):
+            if h == 0:
+                aux = theta[h]
             else:
-                aux += theta[q]*x[k,q-1]
-        y.append(theta[0] + theta[1]*x[k, 0] + theta[2]*x[k, 1])
+                aux += theta[h]*x[k,h-1]
+        y.append(aux)
     
     return y
