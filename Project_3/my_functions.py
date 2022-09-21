@@ -48,7 +48,7 @@ def test(theta, x, mu, std):
             if h == 0:
                 aux = theta[h]
             else:
-                aux += theta[h]*x[h, h-1]
+                aux += theta[h]*x[k, h-1]
         y.append(aux)
         
     return y
