@@ -14,18 +14,15 @@ def normalize(data):
     
     return aux_data[:,:2], aux_data[:,2], mu, std
 
-def h(x,theta):
-    return np.matmul(x, theta)
-
 def cost_function(x, y, theta):
-    return ((h(x, theta)-y).T@(h(x, theta)-y))/(2*y.shape[0])
+    return ((np.matmul(x, theta)-y).T@(np.matmul(x, theta)-y))/(2*y.shape[0])
 
 def gradient_descent(x, y, theta, learning_rate=0.1, num_epochs=10):
     m = x.shape[0]
     J_all = []
     
     for _ in range(num_epochs):
-        h_x = h(x, theta)
+        h_x = np.matmul(x, theta)
         cost_ = (1/m)*(x.T@(h_x - y))
         theta = theta - (learning_rate)*cost_
         J_all.append(cost_function(x, y, theta))
