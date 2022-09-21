@@ -6,13 +6,14 @@ def normalize(data):
     mu = []
     std = []
     aux_data = data.copy()
+    target_column = data.shape[1] - 1
     
     for i in range(0,data.shape[1]-1):
         mu.append(np.mean(aux_data[:,i]))
         std.append(np.std(aux_data[:, i]))
         aux_data[:,i] = ((aux_data[:,i] - np.mean(aux_data[:,i]))/np.std(aux_data[:, i]))
     
-    return aux_data[:,:2], aux_data[:,2], mu, std
+    return aux_data[:, :target_column], aux_data[:, target_column], mu, std
 
 def cost_function(x, y, theta):
     return ((np.matmul(x, theta)-y).T@(np.matmul(x, theta)-y))/(2*y.shape[0])
