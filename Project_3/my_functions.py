@@ -8,9 +8,9 @@ def normalize(data):
     aux_data = data.copy()
     
     for i in range(0,data.shape[1]-1):
-        aux_data[:,i] = ((aux_data[:,i] - np.mean(aux_data[:,i]))/np.std(aux_data[:, i]))
         mu.append(np.mean(aux_data[:,i]))
         std.append(np.std(aux_data[:, i]))
+        aux_data[:,i] = ((aux_data[:,i] - np.mean(aux_data[:,i]))/np.std(aux_data[:, i]))
     
     return aux_data[:,:2], aux_data[:,2], mu, std
 
