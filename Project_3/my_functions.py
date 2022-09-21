@@ -40,9 +40,13 @@ def test(theta, x, mu, std):
     y = []
 
     for k in range(0, len(x)):
-        x[k, 0] = (x[k, 0] - mu[0])/std[0]
-        x[k, 1] = (x[k, 1] - mu[1])/std[1]
-    
+        for q in range(0, x.shape[1]):
+            x[k, q] = (x[k, q] - mu[q])/std[q]
+        for h in range(0, len(theta)):
+            if h == 0:
+                aux = theta[h]
+            else:
+                aux += theta[h]*x[k,h-1]
         y.append(theta[0] + theta[1]*x[k, 0] + theta[2]*x[k, 1])
     
     return y
