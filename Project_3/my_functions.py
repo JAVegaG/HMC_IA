@@ -12,13 +12,14 @@ def plot_data(x, y):
 def normalize(data):
     mu = []
     std = []
+    aux_data = data.copy()
     
     for i in range(0,data.shape[1]-1):
-        data[:,i] = ((data[:,i] - np.mean(data[:,i]))/np.std(data[:, i]))
+        aux_data[:,i] = ((aux_data[:,i] - np.mean(aux_data[:,i]))/np.std(aux_data[:, i]))
         mu.append(np.mean(data[:,i]))
         std.append(np.std(data[:, i]))
     
-    return mu, std
+    return aux_data, mu, std
 
 def h(x,theta):
     return np.matmul(x, theta)
