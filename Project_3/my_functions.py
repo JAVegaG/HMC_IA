@@ -3,15 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-def load_data(filename):
-    df = pd.read_csv(filename, sep=",", index_col=False)
-    df.columns = ["housesize", "rooms", "price"]
-    data = np.array(df, dtype=float)
-    plot_data(data[:,:2], data[:, -1])
-    normalize(data)
-    
-    return data[:,:2], data[:, -1]
-
 def plot_data(x, y):
     plt.xlabel('house size')
     plt.ylabel('price')
