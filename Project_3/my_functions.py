@@ -16,7 +16,7 @@ def normalize(data):
     return aux_data[:, :target_column], aux_data[:, target_column], mu, std
 
 def cost_function(x, y, theta):
-    return ((np.matmul(x, theta)-y).T@(np.matmul(x, theta)-y))/(2*y.shape[0])
+    return ((np.matmul(x, theta)-y).T@(np.matmul(x, theta)-y))/(y.shape[0])
 
 def gradient_descent(x, y, theta, learning_rate=0.1, num_epochs=10):
     m = x.shape[0]
