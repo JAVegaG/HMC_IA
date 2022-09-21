@@ -15,12 +15,16 @@ $$
 
 $$
 \begin{equation}
-\sigma(z) = \hat{y}(z) =
-\frac{1}{1+\exp{(-z)}}
+\sigma(z) = \hat{y}(z) = 
+\begin{cases}
+\frac{1}{1 + exp(z)}, & \text{if } z\geq 0
+\\
+\frac{exp(z)}{1 + exp(z)}, & \text{otherwise}
+\end{cases}
 \end{equation}
 $$
 
-* Next, an optimization algorithm is used to adjust the parameters of the model, which would give better results in the classification. In this example, the gradient descendent is the algorithm used as shown below, where θ is the parameter to optimize (weights or bias), η is the learning rate, ∇ is the gradient itself, y is the actual value, and L is the loss function:
+* Next, an optimization algorithm is used to adjust the parameters of the model, which would give better results in the classification. In this example, the gradient descent is the algorithm used as shown below, where θ is the parameter to optimize (weights or bias), η is the learning rate, ∇ is the gradient itself, y is the actual value, and L is the loss function:
 
 $$
 \begin{equation}
