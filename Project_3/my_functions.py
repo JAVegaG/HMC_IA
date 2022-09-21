@@ -1,13 +1,6 @@
-from re import X
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-
-def plot_data(x, y):
-    plt.xlabel('house size')
-    plt.ylabel('price')
-    plt.plot(x[:,0], y, 'bo')
-    plt.show()
 
 def normalize(data):
     mu = []
