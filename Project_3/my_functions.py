@@ -41,14 +41,15 @@ def test(theta, x, mu, std):
     x = x.copy()
 
     for k in range(0, len(x)):
-        for q in range(0, x.shape[1]):
+
+        for q in range(0, len(mu)):
             x[k, q] = (x[k, q] - mu[q])/std[q]
     
         for h in range(0, len(theta)):
             if h == 0:
-                aux = theta[h]
+                aux = theta[h].copy()
             else:
-                aux += theta[h]*x[k, h-1]
+                aux += (theta[h]*x[k, h-1]).copy()
         y.append(aux)
         
     return y
