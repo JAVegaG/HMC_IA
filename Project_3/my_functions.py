@@ -19,7 +19,7 @@ def normalize(data):
         mu.append(np.mean(aux_data[:,i]))
         std.append(np.std(aux_data[:, i]))
     
-    return aux_data, mu, std
+    return aux_data[:,:2], aux_data[:,2], mu, std
 
 def h(x,theta):
     return np.matmul(x, theta)
