@@ -53,9 +53,9 @@ def SGDM(x, y, theta, learning_rate=0.1, num_epochs=10, momentum=0.9):
 def AdaGrad(x, y, theta, learning_rate=0.1, num_epochs=10):
     m = y.shape[0]
     J_all = []
-    #delta = np.zeros((theta.shape[1], 1))
     x = x.copy()
     y = y.copy()
+    delta = np.zeros(((x.T @ x).shape[1], 1))
     theta = theta.copy()
     
     for _ in range(num_epochs):
