@@ -1,3 +1,4 @@
+from functools import cache
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -28,7 +29,35 @@ def gradient_descent(x, y, theta, learning_rate=0.1, num_epochs=10):
         theta -= (learning_rate)*cost_
         J_all.append(cost_function(x, y, theta))
         
-    return theta, J_all 
+    return theta, J_all
+
+def SGDM(x, y, theta, learning_rate=0.1, num_epochs=10, momentum=0.9):
+    m = x.shape[0]
+    J_all = []
+    delta = np.zeros((theta.shape[1], 1))
+    
+    for _ in range(num_epochs):
+        h_x = np.matmul(x, theta)
+        cost_ = (-2/m)*(x.T@(y - h_x))
+        delta = (learning_rate) * cost_ - momentum * delta
+        theta -= delta
+        J_all.append(cost_function(x, y, theta))
+        
+    return theta, J_all    
+
+def AdaGrad(x, y, theta, learning_rate=0.1, num_epochs=10):
+    m = x.shape[0]
+    J_all = []
+    cache = np.zeros((theta.shape[1], 1))
+    
+    for _ in range(num_epochs):
+        h_x = np.matmul(x, theta)
+        cost_ = (-2/m)*(x.T@(y - h_x))
+        cache = cost_**2
+        theta -= learning_rate * cost_ / (np.sqrt(cache + 1e-6))
+        J_all.append(cost_function(x, y, theta))
+        
+    return theta, J_all    
 
 def plot_cost(J_all, num_epochs):
     plt.xlabel('Epochs')
