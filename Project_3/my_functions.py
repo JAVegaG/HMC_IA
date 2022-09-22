@@ -55,13 +55,16 @@ def AdaGrad(x, y, theta, learning_rate=0.1, num_epochs=10):
     J_all = []
     x = x.copy()
     y = y.copy()
-    delta = np.zeros(((x.T @ x).shape[1], 1))
+    #delta = np.zeros(((x.T @ x).shape[1], 1))
     theta = theta.copy()
     
     for _ in range(num_epochs):
         h_x = np.matmul(x, theta)
         cost_ = (-2/m)*(x.T@(y - h_x))
-        delta += cost_**2
+        if _ == 0:
+            delta = cost_**2
+        else:
+            delta += cost_**2
         theta -= learning_rate * cost_ / (np.sqrt(delta + 1e-6))
         J_all.append(cost_function(x, y, theta))
         
