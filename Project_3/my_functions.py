@@ -44,8 +44,8 @@ def SGDM(x, y, theta, learning_rate=0.1, num_epochs=10, momentum=0.9):
     for _ in range(num_epochs):
         h_x = np.matmul(x, theta)
         cost_ = (-2/m)*(x.T@(y - h_x))
-        delta = momentum * delta.copy() + (1 - momentum) * learning_rate * cost_.copy()
-        theta -= delta.copy()
+        delta = momentum * delta.copy() + (1 - momentum) * cost_.copy()
+        theta -= learning_rate * delta.copy()
         J_all.append(cost_function(x, y, theta))
         
     return theta, J_all    
