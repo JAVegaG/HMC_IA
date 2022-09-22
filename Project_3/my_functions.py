@@ -24,7 +24,7 @@ def gradient_descent(x, y, theta, learning_rate=0.1, num_epochs=10):
     
     for _ in range(num_epochs):
         h_x = np.matmul(x, theta)
-        cost_ = (-2/m)*(x.T@(h_x - y))
+        cost_ = (-2/m)*(x.T@(y - h_x))
         theta -= (learning_rate)*cost_
         J_all.append(cost_function(x, y, theta))
         
