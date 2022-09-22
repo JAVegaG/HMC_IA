@@ -5,12 +5,7 @@ import numpy as np
 # Sigmoid function and its differentiation
 def sigmoid(z):
     z = z.copy()
-    if z >= 0:
-        z = np.exp(-z)
-        return 1 / (1 + z)
-    else:
-        z = np.exp(z)
-        return z / (1 + z)
+    return [ ( 1 / (1 + np.exp(-x)) ) if x >= 0 else ( np.exp(x) / (1 + np.exp(x)) ) for x in z]
     
 def dsigmoid(z):
     s = sigmoid(z)
