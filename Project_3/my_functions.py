@@ -19,8 +19,11 @@ def cost_function(x, y, theta):
     return ((y - np.matmul(x, theta)).T@(y - np.matmul(x, theta)))/(y.shape[0])
 
 def gradient_descent(x, y, theta, learning_rate=0.1, num_epochs=10):
-    m = x.shape[0]
+    m = y.shape[0]
     J_all = []
+    x = x.copy()
+    y = y.copy()
+    theta = theta.copy()
     
     for _ in range(num_epochs):
         h_x = np.matmul(x, theta)
@@ -31,9 +34,12 @@ def gradient_descent(x, y, theta, learning_rate=0.1, num_epochs=10):
     return theta, J_all
 
 def SGDM(x, y, theta, learning_rate=0.1, num_epochs=10, momentum=0.9):
-    m = x.shape[0]
+    m = y.shape[0]
     J_all = []
     delta = np.zeros((theta.shape[1], 1))
+    x = x.copy()
+    y = y.copy()
+    theta = theta.copy()
     
     for _ in range(num_epochs):
         h_x = np.matmul(x, theta)
@@ -45,9 +51,12 @@ def SGDM(x, y, theta, learning_rate=0.1, num_epochs=10, momentum=0.9):
     return theta, J_all    
 
 def AdaGrad(x, y, theta, learning_rate=0.1, num_epochs=10):
-    m = x.shape[0]
+    m = y.shape[0]
     J_all = []
     delta = np.zeros((theta.shape[1], 1))
+    x = x.copy()
+    y = y.copy()
+    theta = theta.copy()
     
     for _ in range(num_epochs):
         h_x = np.matmul(x, theta)
@@ -68,6 +77,7 @@ def test(theta, x, mu, std):
 
     y = []
     x = x.copy()
+    theta = theta.copy()
 
     for k in range(0, len(x)):
 
