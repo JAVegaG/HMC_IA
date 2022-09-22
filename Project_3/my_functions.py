@@ -61,7 +61,7 @@ def AdaGrad(x, y, theta, learning_rate=0.1, num_epochs=10):
     for _ in range(num_epochs):
         y_pred = np.matmul(x, theta)
         cost_ = (-2/m)*(x.T@(y - y_pred))
-        delta += cost_**2
+        delta += cost_.T @ cost_
         theta -= ( learning_rate / ( np.sqrt( delta + 1e-6 ) ) ) * cost_
         J_all.append(cost_function(x, y, theta))
         
