@@ -35,7 +35,7 @@ Next, to evaluate the performance of the algorithm it is used a **loss function*
 
 $$
 \begin{equation}
-L_{MSE} = \frac{1}{n} \sum_{i=1}^{n}(\hat{y}_{i} - y_i)^2
+L_{MSE} = \frac{1}{n} \sum_{i=1}^{n}(y_i - \hat{y}_{i})^2
 \end{equation} 
 $$
 
@@ -53,6 +53,6 @@ $$
 \begin{equation}
 \frac{\partial L_{MSE}(\hat{y},y)}{\partial \vec{\theta}}
 = -
-\frac{2}{n} \sum_{i=1}^{n}\vec{X}_i^T \cdot (\hat{y}_{i} - y_i)
+\frac{2}{n} \sum_{i=1}^{n}\vec{X}_i^T \cdot (y_i - \hat{y}_{i})
 \end{equation}
 $$
