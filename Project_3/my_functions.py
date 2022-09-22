@@ -21,9 +21,9 @@ def cost_function(x, y, theta):
 def gradient_descent(x, y, theta, learning_rate=0.1, num_epochs=10):
     m = y.shape[0]
     J_all = []
-    x = x.astype(float).copy()
-    y = y.astype(float).copy()
-    theta = theta.astype(float).copy()
+    x = x.copy()
+    y = y.copy()
+    theta = theta.copy()
     
     for _ in range(num_epochs):
         y_pred = np.matmul(x, theta)
@@ -36,10 +36,10 @@ def gradient_descent(x, y, theta, learning_rate=0.1, num_epochs=10):
 def SGDM(x, y, theta, learning_rate=0.1, num_epochs=10, momentum=0.9):
     m = y.shape[0]
     J_all = []
-    delta = np.zeros((theta.shape[1], 1), dtype=float)
-    x = x.astype(float).copy()
-    y = y.astype(float).copy()
-    theta = theta.astype(float).copy()
+    delta = np.zeros((theta.shape[1], 1))
+    x = x.copy()
+    y = y.copy()
+    theta = theta.copy()
     
     for _ in range(num_epochs):
         y_pred = np.matmul(x, theta)
@@ -53,14 +53,14 @@ def SGDM(x, y, theta, learning_rate=0.1, num_epochs=10, momentum=0.9):
 def AdaGrad(x, y, theta, learning_rate=0.1, num_epochs=10):
     m = y.shape[0]
     J_all = []
-    x = x.astype(float).copy()
-    y = y.astype(float).copy()
-    delta = np.zeros(((x.T @ x).shape[1], 1), dtype=float)
-    theta = theta.astype(float).copy()
+    x = x.copy()
+    y = y.copy()
+    delta = np.zeros(((x.T @ x).shape[1], 1))
+    theta = theta.copy()
     
     for _ in range(num_epochs):
         y_pred = np.matmul(x, theta)
-        cost_ = (-2/m)*(x.T@(y - y_pred))
+        cost_ = (-2/m) * ( x.T @ (y - y_pred) )
         delta += cost_**2
         theta -= ( learning_rate / ( np.sqrt( delta + 10e-10 ) ) ) * cost_
         J_all.append(cost_function(x, y, theta))
