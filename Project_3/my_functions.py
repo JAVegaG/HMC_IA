@@ -26,8 +26,8 @@ def gradient_descent(x, y, theta, learning_rate=0.1, num_epochs=10):
     theta = theta.copy()
     
     for _ in range(num_epochs):
-        h_x = np.matmul(x, theta)
-        cost_ = (-2/m)*(x.T@(y - h_x))
+        y_pred = np.matmul(x, theta)
+        cost_ = (-2/m)*(x.T@(y - y_pred))
         theta -= (learning_rate)*cost_.copy()
         J_all.append(cost_function(x, y, theta))
         
@@ -42,8 +42,8 @@ def SGDM(x, y, theta, learning_rate=0.1, num_epochs=10, momentum=0.9):
     theta = theta.copy()
     
     for _ in range(num_epochs):
-        h_x = np.matmul(x, theta)
-        cost_ = (-2/m)*(x.T@(y - h_x))
+        y_pred = np.matmul(x, theta)
+        cost_ = (-2/m)*(x.T@(y - y_pred))
         delta = learning_rate * cost_.copy() - momentum * delta.copy() 
         theta -= delta.copy()
         J_all.append(cost_function(x, y, theta))
@@ -59,10 +59,10 @@ def AdaGrad(x, y, theta, learning_rate=0.1, num_epochs=10):
     theta = theta.copy()
     
     for _ in range(num_epochs):
-        h_x = np.matmul(x, theta)
-        cost_ = (-2/m)*(x.T@(y - h_x))
+        y_pred = np.matmul(x, theta)
+        cost_ = (-2/m)*(x.T@(y - y_pred))
         delta += cost_**2
-        theta -= (learning_rate / (np.sqrt(delta + 1e-6))) * cost_
+        theta -= ( learning_rate / ( np.sqrt( delta + 1e-6 ) ) ) * cost_
         J_all.append(cost_function(x, y, theta))
         
     return theta, J_all    
