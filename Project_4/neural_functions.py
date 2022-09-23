@@ -1,5 +1,3 @@
-from sklearn.datasets import make_circles
-from sklearn.metrics import accuracy_score
 import numpy as np
 
 # Sigmoid function and its differentiation
