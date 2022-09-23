@@ -122,3 +122,7 @@ class mlp:
                 cost,
                 accuracy_score(y, (y_pred > 0.5).astype(int))
                 ,optimizer))
+        print("After Training {} epochs\nLoss value {} accuracy {} Optimizer {}\n".format(n+1,
+                cost,
+                accuracy_score(y, (y_pred > 0.5).astype(int))
+                ,optimizer))
