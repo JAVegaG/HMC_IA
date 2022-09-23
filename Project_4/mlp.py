@@ -104,8 +104,8 @@ class mlp:
                 self.delta_W[l] += self.dW[l]**2
                 self.delta_b[l] += self.db[l]**2
 
-                self.W[l] -= ( eta / ( np.sqrt( self.delta_W[l] + 10e-10 ) ) ) * self.dW
-                self.b[l] -= ( eta / ( np.sqrt( self.delta_b[l] + 10e-10 ) ) ) * self.db
+                self.W[l] -= np.asarray(( eta / ( np.sqrt( self.delta_W[l] + 10e-10 ) ) ),dytpe=float) * self.dW
+                self.b[l] -= np.asarray(( eta / ( np.sqrt( self.delta_b[l] + 10e-10 ) ) ),dtype=float) * self.db
             else:
                 self.W[l] -= eta * self.dW[l]
                 self.b[l] -= eta * self.db[l]
