@@ -31,8 +31,8 @@ class mlp:
         self.db = [None] * L
         self.da = [None] * L
 
-        self.delta_W = np.zeros(L)
-        self.delta_b = np.zeros(L)
+        self.delta_W = [None] * L
+        self.delta_b = [None] * L
 
     def initialize(self, seed=42):
         """initialize the value of weight matrices and bias vectors with small random numbers."""
