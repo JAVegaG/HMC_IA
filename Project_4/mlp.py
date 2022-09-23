@@ -101,8 +101,6 @@ class mlp:
                 self.b[l] -= self.delta_b[l]
             
             elif optimizer == 'AdaGrad':
-                self.delta_W[l] = [0 if x == None else x for x in self.delta_W[l]].copy()
-                self.delta_b[l] = [0 if x == None else x for x in self.delta_b[l]].copy()
                 self.delta_W[l] += self.dW[l]**2
                 self.delta_b[l] += self.db[l]**2
 
