@@ -31,8 +31,8 @@ class mlp:
         self.db = [None] * L
         self.da = [None] * L
 
-        self.delta_W = np.zeros(self.W.shape)
-        self.delta_b = np.zeros(self.b.shape)
+        self.delta_W = [None] * L
+        self.delta_b = [None] * L
 
     def initialize(self, seed=42):
         """initialize the value of weight matrices and bias vectors with small random numbers."""
@@ -44,6 +44,10 @@ class mlp:
 
             self.delta_W[l] = np.random.randn(insize, outsize) * sigma
             self.delta_b[l] = np.random.randn(1, outsize) * sigma
+        
+        self.delta_W = [0 if x == None else x for x in self.delta_W].copy()
+        self.delta_b = [0 if x == None else x for x in self.delta_b].copy()
+        
 
     def forward(self, x):
         """Feed forward using existing `W` and `b`, and overwrite the result variables `a` and `z`
