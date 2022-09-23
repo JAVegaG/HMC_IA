@@ -118,4 +118,7 @@ class mlp:
             self.update(learning_rate, optimizer, momentum)
             cost = self.loss(y, y_pred)
             if verbose:
-                print("Iteration {} - loss value {} accuracy {}\n".format(n+1, cost, accuracy_score(y, (y_pred > 0.5).astype(int))))
+                print("Epoch {} - loss value {} accuracy {} Optimizer {}\n".format(n+1,
+                cost,
+                accuracy_score(y, (y_pred > 0.5).astype(int))
+                ,optimizer))
