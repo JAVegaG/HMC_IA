@@ -16,7 +16,7 @@ def relu(z):
 def drelu(z):
     return (z > 0).astype(float)
 
-# Loss function L(y, yhat) and its differentiation
+# Loss function L(y, y_pred) and its differentiation
 def cross_entropy(y_true, y_pred):
     """Binary cross entropy function
     """
@@ -25,5 +25,5 @@ def cross_entropy(y_true, y_pred):
     return -np.mean(y_zero_loss + y_one_loss)
 
 def d_cross_entropy(y_true, y_pred):
-    """ dL/dyhat """
+    """ dL/dy_pred """
     return - np.divide(y_true, y_pred + 1e-9) + np.divide(1-y_true, (1-y_pred) + 1e-9)
