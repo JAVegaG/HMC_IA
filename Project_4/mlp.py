@@ -93,7 +93,7 @@ class mlp:
             if optimizer == 'GD':
                 self.W[l] -= eta * self.dW[l]
                 self.b[l] -= eta * self.db[l]
-            elif optimizer == 'SGDM':
+            elif optimizer == 'GDM':
                 self.delta_W[l] = eta * self.dW[l] - momentum * self.delta_W[l]
                 self.delta_b[l] = eta * self.db[l] - momentum * self.delta_b[l]
 

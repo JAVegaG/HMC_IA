@@ -7,7 +7,7 @@ class logitRegression():
     self.losses = []
     self.train_accuracies = []
 
-  def fit(self, x, y, epochs, learningRate=0.1, optimizationAlgorithm='SGD',
+  def fit(self, x, y, epochs, learningRate=0.1, optimizationAlgorithm='GD',
           momentum=0.9):
     """
     Given X and Y, where X is the input matrix of the net, and Y is the actual class expected
@@ -53,18 +53,18 @@ class logitRegression():
     gradients_w = np.matmul(x.transpose(), error_y)
     gradients_w = np.array([np.mean(grad) for grad in gradients_w])
 
-    SGD_w = learningRate * gradients_w
-    SGD_b = learningRate * gradient_b
+    GD_w = learningRate * gradients_w
+    GD_b = learningRate * gradient_b
     
-    if optimizationAlgorithm == 'SGD':
+    if optimizationAlgorithm == 'GD':
 
-      self.weights -= SGD_w
-      self.bias -= SGD_b
+      self.weights -= GD_w
+      self.bias -= GD_b
 
-    elif optimizationAlgorithm == 'SGDM':
+    elif optimizationAlgorithm == 'GDM':
 
-      self.change_w = momentum * self.change_w - SGD_w
-      self.change_b = momentum * self.change_b - SGD_b
+      self.change_w = momentum * self.change_w - GD_w
+      self.change_b = momentum * self.change_b - GD_b
 
       self.weights += self.change_w
       self.bias += self.change_b
@@ -78,8 +78,8 @@ class logitRegression():
       self.bias -= learningRate * gradient_b / (np.sqrt(self.cache_b + 1e-6))
 
     else:
-      self.weights -= SGD_w
-      self.bias -= SGD_b
+      self.weights -= GD_w
+      self.bias -= GD_b
 
   def predict(self, x):
     z = np.matmul(x, self.weights.transpose()) + self.bias

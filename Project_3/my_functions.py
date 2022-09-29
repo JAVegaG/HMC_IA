@@ -33,7 +33,7 @@ def gradient_descent(x, y, theta, learning_rate=0.1, num_epochs=10):
         
     return theta, J_all
 
-def SGDM(x, y, theta, learning_rate=0.1, num_epochs=10, momentum=0.9):
+def GDM(x, y, theta, learning_rate=0.1, num_epochs=10, momentum=0.9):
     m = y.shape[0]
     J_all = []
     delta = np.zeros((theta.shape[1], 1))
